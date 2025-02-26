@@ -29,10 +29,7 @@ if (navigator.geolocation)
         const { lat, lng } = mapEvent.latlng;
         coords = [lat, lng];
 
-        L.marker(coords)
-          .addTo(map)
-          .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-          .openPopup();
+        L.marker(coords).addTo(map).bindPopup('Workout').openPopup();
       });
     },
     function () {
