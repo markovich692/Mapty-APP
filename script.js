@@ -65,10 +65,18 @@ form.addEventListener('submit', function (e) {
     .openPopup();
 
   //Clear input on submit
-  inputDistance.value = '';
-  inputDuration.value = '';
-  inputCadence.value = '';
-  inputElevation.value = '';
+  const arrInputs = [
+    inputDistance,
+    inputDuration,
+    inputCadence,
+    inputElevation,
+  ];
+
+  arrInputs.forEach(function (el) {
+    el.value = '';
+    el.blur();
+  });
+  inputDistance.focus();
 });
 
 // let formattedCurrency = new Intl.NumberFormat(navigator.language, {
