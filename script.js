@@ -27,14 +27,16 @@ if (navigator.geolocation)
 
       map.on('click', function (mapEvent) {
         form.classList.remove('hidden');
+        inputDistance.focus();
+
+        //Modifies the form according to the type of activities
+        //if Cycling---->Elev Gain on the form
+        //if Running---->Cadence on the form
 
         form.addEventListener('submit', function (e) {
           e.preventDefault();
-          const formInputs = e.target.children;
 
-          Array.from(formInputs, function (el) {
-            console.log(el);
-          });
+          //OnSubmit---->Adds marker to the page && adds the activity to the list
         });
 
         // const { lat, lng } = mapEvent.latlng;
