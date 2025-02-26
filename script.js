@@ -37,22 +37,22 @@ if (navigator.geolocation)
           e.preventDefault();
 
           //OnSubmit---->Adds marker to the page && adds the activity to the list
-        });
 
-        // const { lat, lng } = mapEvent.latlng;
-        // L.marker([lat, lng])
-        //   .addTo(map)
-        //   .bindPopup(
-        //     L.popup({
-        //       maxWidth: 250,
-        //       minWidth: 100,
-        //       autoClose: false,
-        //       closeOnClick: false,
-        //       className: 'running-popup',
-        //     })
-        //   )
-        //   .setPopupContent('Workout')
-        //   .openPopup();
+          const { lat, lng } = mapEvent.latlng;
+          L.marker([lat, lng])
+            .addTo(map)
+            .bindPopup(
+              L.popup({
+                maxWidth: 250,
+                minWidth: 100,
+                autoClose: false,
+                closeOnClick: false,
+                className: 'running-popup',
+              })
+            )
+            .setPopupContent('Workout')
+            .openPopup();
+        });
       });
     },
     function () {
