@@ -88,3 +88,48 @@ inputType.addEventListener('change', function (e) {
 // console.log(Number.MAX_SAFE_INTEGER);
 // console.log(900719925474099149999n);
 // console.log(BigInt('900719925474099149999'));
+
+class Workout {
+  #id;
+  #date;
+
+  constructor(id, distance, duration, coords, date) {
+    this.#id = id;
+    this.distance = distance;
+    this.duration = duration;
+    this.coords = coords;
+    this.#date = date;
+  }
+}
+
+class Running extends Workout {
+  #fName;
+
+  constructor(id, distance, duration, coords, date, fName, cadence, pace) {
+    super(id, distance, duration, coords, date);
+
+    this.#fName = fName;
+    this.cadence = cadence;
+    this.pace = pace;
+  }
+}
+
+class Running extends Workout {
+  #fName;
+  constructor(
+    id,
+    distance,
+    duration,
+    coords,
+    date,
+    fName,
+    elevationGain,
+    speed
+  ) {
+    super(id, distance, duration, coords, date);
+
+    this.#fName = fName;
+    this.elevationGain = elevationGain;
+    this.speed = speed;
+  }
+}
