@@ -16,14 +16,17 @@ if (navigator.geolocation)
     function (position) {
       const { latitude, longitude } = position.coords;
       const coords = [latitude, longitude];
-      //   console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
 
       const map = L.map('map').setView(coords, 13);
 
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
+
+      map.on('click', function (mapEvent) {
+        console.log(mapEvent);
+      });
 
       L.marker(coords)
         .addTo(map)
@@ -31,6 +34,16 @@ if (navigator.geolocation)
         .openPopup();
     },
     function () {
-      alert('cannot get location');
+      alert('Unable to get location');
     }
   );
+
+// let formattedCurrency = new Intl.NumberFormat(navigator.language, {
+//   style: 'currency',
+//   currency: 'USD',
+// }).format(1399999999);
+
+// console.log(formattedCurrency);
+// console.log(Number.MAX_SAFE_INTEGER);
+// console.log(900719925474099149999n);
+// console.log(BigInt('900719925474099149999'));
