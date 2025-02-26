@@ -75,8 +75,8 @@ form.addEventListener('submit', function (e) {
 
 //Changes the type on change
 inputType.addEventListener('change', function (e) {
-  inputElevation.closest('div').classList.toggle('form__row--hidden');
-  inputCadence.closest('div').classList.toggle('form__row--hidden');
+  inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+  inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
 });
 
 // let formattedCurrency = new Intl.NumberFormat(navigator.language, {
