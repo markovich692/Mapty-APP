@@ -10,6 +10,7 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+
 let map;
 let mapEvent;
 
@@ -65,18 +66,17 @@ form.addEventListener('submit', function (e) {
     .openPopup();
 
   //Clear input on submit
-  const arrInputs = [
-    inputDistance,
-    inputDuration,
-    inputCadence,
-    inputElevation,
-  ];
+  inputDistance.value =
+    inputDuration.value =
+    inputCadence.value =
+    inputElevation.value =
+      '';
+});
 
-  arrInputs.forEach(function (el) {
-    el.value = '';
-    el.blur();
-  });
-  inputDistance.focus();
+//Changes the type on change
+inputType.addEventListener('change', function (e) {
+  inputElevation.closest('div').classList.toggle('form__row--hidden');
+  inputCadence.closest('div').classList.toggle('form__row--hidden');
 });
 
 // let formattedCurrency = new Intl.NumberFormat(navigator.language, {
