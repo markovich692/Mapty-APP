@@ -13,7 +13,20 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 //Implements the App class
 
-class App {}
+class App {
+  _getPosition() {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        const { longitude, latitude } = position.coords;
+        let coords = [longitude, latitude];
+        return coords;
+      },
+      function () {
+        console.log('Could not get position');
+      }
+    );
+  }
+}
 
 let map;
 let mapEvent;
