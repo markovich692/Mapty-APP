@@ -20,32 +20,7 @@ class App {
     this._getPosition();
 
     //FORM
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      //OnSubmit---->Adds marker to the page && adds the activity to the list
-      const { lat, lng } = mapEvent.latlng;
-      L.marker([lat, lng])
-        .addTo(map)
-        .bindPopup(
-          L.popup({
-            maxWidth: 250,
-            minWidth: 100,
-            autoClose: false,
-            closeOnClick: false,
-            className: 'running-popup',
-          })
-        )
-        .setPopupContent('Workout')
-        .openPopup();
-
-      //Clear input on submit
-      inputDistance.value =
-        inputDuration.value =
-        inputCadence.value =
-        inputElevation.value =
-          '';
-    });
+    form.addEventListener('submit', this._newWorkout.bind(this));
 
     //Changes the type on change
     inputType.addEventListener('change', function (e) {
@@ -74,17 +49,17 @@ class App {
     this.#map = L.map('map').setView(coords, 13);
 
     // console.log(this.#map);
-
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
 
-    console.log(this.#map);
-    console.log(this);
+    // console.log(this.#map);
+    // console.log(this);
 
     //Handling events on map using the map object
     this.#map.on('click', this._showForm.bind(this));
+    // console.log(this);
   }
 
   _showForm(mapE) {
@@ -95,7 +70,32 @@ class App {
 
   _toggleElevationField() {}
 
-  _newWorkout() {}
+  _newWorkout(e) {
+    e.preventDefault();
+
+    //OnSubmit---->Adds marker to the page && adds the activity to the list
+    const { lat, lng } = this.#mapEvent.latlng;
+    L.marker([lat, lng])
+      .addTo(this.#map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          autoClose: false,
+          closeOnClick: false,
+          className: 'running-popup',
+        })
+      )
+      .setPopupContent('Workout')
+      .openPopup();
+
+    //Clear input on submit
+    inputDistance.value =
+      inputDuration.value =
+      inputCadence.value =
+      inputElevation.value =
+        '';
+  }
 }
 
 const app = new App();
