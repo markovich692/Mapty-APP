@@ -15,7 +15,33 @@ const inputElevation = document.querySelector('.form__input--elevation');
 class App {
   constructor() {}
 
-  _getPosition() {}
+  _getPosition() {
+    if (navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          const { latitude, longitude } = position.coords;
+          let coords = [latitude, longitude];
+
+          //sets the view to the current location
+          map = L.map('map').setView(coords, 13);
+
+          L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            attribution:
+              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          }).addTo(map);
+
+          //Handling events on map using the map object
+          map.on('click', function (mapE) {
+            mapEvent = mapE;
+            form.classList.remove('hidden');
+            inputDistance.focus();
+          });
+        },
+        function () {
+          alert('Unable to get location');
+        }
+      );
+  }
 
   _loadMap() {}
 
@@ -28,36 +54,6 @@ class App {
 
 let map;
 let mapEvent;
-
-if (navigator.geolocation)
-  navigator.geolocation.getCurrentPosition(
-    function (position) {
-      const { latitude, longitude } = position.coords;
-      let coords = [latitude, longitude];
-
-      //sets the view to the current location
-      map = L.map('map').setView(coords, 13);
-
-      L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
-
-      //Handling events on map using the map object
-      map.on('click', function (mapE) {
-        mapEvent = mapE;
-        form.classList.remove('hidden');
-        inputDistance.focus();
-
-        //Modifies the form according to the type of activities
-        //if Cycling---->Elev Gain on the form
-        //if Running---->Cadence on the form
-      });
-    },
-    function () {
-      alert('Unable to get location');
-    }
-  );
 
 //FORM
 form.addEventListener('submit', function (e) {
