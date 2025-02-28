@@ -12,20 +12,18 @@ const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
 //Implements the App class
-
 class App {
-  _getPosition() {
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        const { longitude, latitude } = position.coords;
-        let coords = [longitude, latitude];
-        return coords;
-      },
-      function () {
-        console.log('Could not get position');
-      }
-    );
-  }
+  constructor() {}
+
+  _getPosition() {}
+
+  _loadMap() {}
+
+  _showForm() {}
+
+  _toggleElevationField() {}
+
+  _newWorkout() {}
 }
 
 let map;
