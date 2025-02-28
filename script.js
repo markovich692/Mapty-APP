@@ -13,7 +13,12 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 //Implements the App class
 class App {
-  constructor() {}
+  #map;
+  #mapEvent;
+
+  constructor() {
+    this._getPosition();
+  }
 
   _getPosition() {
     if (navigator.geolocation)
@@ -27,30 +32,27 @@ class App {
     let coords = [latitude, longitude];
 
     //sets the view to the current location
-    map = L.map('map').setView(coords, 13);
+    this.#map = L.map('map').setView(coords, 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-  }
+    }).addTo(this.#map);
 
-  _showForm() {
     //Handling events on map using the map object
-    map.on('click', function (mapE) {
-      mapEvent = mapE;
+    this.#map.on('click', function (mapE) {
+      this.#mapEvent = mapE;
       form.classList.remove('hidden');
       inputDistance.focus();
     });
   }
 
+  _showForm() {}
+
   _toggleElevationField() {}
 
   _newWorkout() {}
 }
-
-let map;
-let mapEvent;
 
 //FORM
 form.addEventListener('submit', function (e) {
@@ -87,8 +89,6 @@ inputType.addEventListener('change', function (e) {
 });
 
 const app = new App();
-app._getPosition();
-app._showForm();
 
 // let formattedCurrency = new Intl.NumberFormat(navigator.language, {
 //   style: 'currency',
