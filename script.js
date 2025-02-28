@@ -31,30 +31,31 @@ class App {
   }
 
   _loadMap(position) {
+    console.log(this);
     const { latitude, longitude } = position.coords;
     let coords = [latitude, longitude];
-
-    //cannot get access to this
-    console.log(this);
     //sets the view to the current location
     this.#map = L.map('map').setView(coords, 13);
 
-    console.log(this.#map);
+    // console.log(this.#map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
 
+    console.log(this.#map);
+    console.log(this);
+
     //Handling events on map using the map object
-    this.#map.on('click', function (mapE) {
-      this.#mapEvent = mapE;
-      form.classList.remove('hidden');
-      inputDistance.focus();
-    });
+    this.#map.on('click', this._showForm.bind(this));
   }
 
-  _showForm() {}
+  _showForm(mapE) {
+    this.#mapEvent = mapE;
+    form.classList.remove('hidden');
+    inputDistance.focus();
+  }
 
   _toggleElevationField() {}
 
