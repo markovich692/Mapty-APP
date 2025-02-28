@@ -22,9 +22,12 @@ class App {
 
   _getPosition() {
     if (navigator.geolocation)
-      navigator.geolocation.getCurrentPosition(this._loadMap.call, function () {
-        alert('Unable to get location');
-      });
+      navigator.geolocation.getCurrentPosition(
+        this._loadMap.bind(this),
+        function () {
+          alert('Unable to get location');
+        }
+      );
   }
 
   _loadMap(position) {
