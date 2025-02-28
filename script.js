@@ -18,6 +18,42 @@ class App {
 
   constructor() {
     this._getPosition();
+
+    //FORM
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      //OnSubmit---->Adds marker to the page && adds the activity to the list
+      const { lat, lng } = mapEvent.latlng;
+      L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup(
+          L.popup({
+            maxWidth: 250,
+            minWidth: 100,
+            autoClose: false,
+            closeOnClick: false,
+            className: 'running-popup',
+          })
+        )
+        .setPopupContent('Workout')
+        .openPopup();
+
+      //Clear input on submit
+      inputDistance.value =
+        inputDuration.value =
+        inputCadence.value =
+        inputElevation.value =
+          '';
+    });
+
+    //Changes the type on change
+    inputType.addEventListener('change', function (e) {
+      inputElevation
+        .closest('.form__row')
+        .classList.toggle('form__row--hidden');
+      inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+    });
   }
 
   _getPosition() {
@@ -61,40 +97,6 @@ class App {
 
   _newWorkout() {}
 }
-
-//FORM
-form.addEventListener('submit', function (e) {
-  e.preventDefault();
-
-  //OnSubmit---->Adds marker to the page && adds the activity to the list
-  const { lat, lng } = mapEvent.latlng;
-  L.marker([lat, lng])
-    .addTo(map)
-    .bindPopup(
-      L.popup({
-        maxWidth: 250,
-        minWidth: 100,
-        autoClose: false,
-        closeOnClick: false,
-        className: 'running-popup',
-      })
-    )
-    .setPopupContent('Workout')
-    .openPopup();
-
-  //Clear input on submit
-  inputDistance.value =
-    inputDuration.value =
-    inputCadence.value =
-    inputElevation.value =
-      '';
-});
-
-//Changes the type on change
-inputType.addEventListener('change', function (e) {
-  inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
-  inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
-});
 
 const app = new App();
 
