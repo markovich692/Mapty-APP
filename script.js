@@ -22,7 +22,7 @@ class App {
 
   _getPosition() {
     if (navigator.geolocation)
-      navigator.geolocation.getCurrentPosition(this._loadMap, function () {
+      navigator.geolocation.getCurrentPosition(this._loadMap.call, function () {
         alert('Unable to get location');
       });
   }
@@ -31,8 +31,12 @@ class App {
     const { latitude, longitude } = position.coords;
     let coords = [latitude, longitude];
 
+    //cannot get access to this
+    console.log(this);
     //sets the view to the current location
     this.#map = L.map('map').setView(coords, 13);
+
+    console.log(this.#map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
