@@ -11,6 +11,10 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+//Implements the App class
+
+class App {}
+
 let map;
 let mapEvent;
 
@@ -45,7 +49,6 @@ if (navigator.geolocation)
   );
 
 //FORM
-
 form.addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -89,47 +92,48 @@ inputType.addEventListener('change', function (e) {
 // console.log(900719925474099149999n);
 // console.log(BigInt('900719925474099149999'));
 
-class Workout {
-  #id;
-  #date;
+//CLASS
+// class Workout {
+//   #id;
+//   #date;
 
-  constructor(id, distance, duration, coords, date) {
-    this.#id = id;
-    this.distance = distance;
-    this.duration = duration;
-    this.coords = coords;
-    this.#date = date;
-  }
-}
+//   constructor(id, distance, duration, coords, date) {
+//     this.#id = id;
+//     this.distance = distance;
+//     this.duration = duration;
+//     this.coords = coords;
+//     this.#date = date;
+//   }
+// }
 
-class Running extends Workout {
-  #fName;
+// class Running extends Workout {
+//   #fName;
 
-  constructor(id, distance, duration, coords, date, fName, cadence, pace) {
-    super(id, distance, duration, coords, date);
+//   constructor(id, distance, duration, coords, date, fName, cadence, pace) {
+//     super(id, distance, duration, coords, date);
 
-    this.#fName = fName;
-    this.cadence = cadence;
-    this.pace = pace;
-  }
-}
+//     this.#fName = fName;
+//     this.cadence = cadence;
+//     this.pace = pace;
+//   }
+// }
 
-class Running extends Workout {
-  #fName;
-  constructor(
-    id,
-    distance,
-    duration,
-    coords,
-    date,
-    fName,
-    elevationGain,
-    speed
-  ) {
-    super(id, distance, duration, coords, date);
+// class Cycling extends Workout {
+//   #fName;
+//   constructor(
+//     id,
+//     distance,
+//     duration,
+//     coords,
+//     date,
+//     fName,
+//     elevationGain,
+//     speed
+//   ) {
+//     super(id, distance, duration, coords, date);
 
-    this.#fName = fName;
-    this.elevationGain = elevationGain;
-    this.speed = speed;
-  }
-}
+//     this.#fName = fName;
+//     this.elevationGain = elevationGain;
+//     this.speed = speed;
+//   }
+// }
