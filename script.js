@@ -16,7 +16,7 @@ class Workout {
   date = new Date();
   id = (+new Date() + '').slice(-10);
 
-  constructor(distance, duration, coords) {
+  constructor(coords, distance, duration) {
     this.distance = distance;
     this.duration = duration;
     this.coords = coords;
@@ -24,7 +24,7 @@ class Workout {
 }
 
 class Running extends Workout {
-  constructor(distance, duration, coords, cadence) {
+  constructor(coords, distance, duration, cadence) {
     super(distance, duration, coords);
 
     this.cadence = cadence;
@@ -40,7 +40,7 @@ class Running extends Workout {
 }
 
 class Cycling extends Workout {
-  constructor(distance, duration, coords, elevationGain) {
+  constructor(coords, distance, duration, elevationGain) {
     super(distance, duration, coords);
 
     this.elevationGain = elevationGain;
@@ -50,7 +50,7 @@ class Cycling extends Workout {
 
   calcSpeed() {
     //km/h
-    this.speed = this.distance / this.duration;
+    this.speed = this.distance / (this.duration / 60);
     return this.speed;
   }
 }
@@ -115,8 +115,17 @@ class App {
 
   _newWorkout(e) {
     e.preventDefault();
+    //Get data from form
 
-    //OnSubmit---->Adds marker to the page
+    //Checks if data is valid
+
+    //If workout is running create a running object
+
+    //If workout is cycling create a cycling object
+
+    //Adds new object to workout array
+
+    //Render workout on map as marker
     const { lat, lng } = this.#mapEvent.latlng;
     L.marker([lat, lng])
       .addTo(this.#map)
@@ -132,7 +141,9 @@ class App {
       .setPopupContent('Workout')
       .openPopup();
 
-    //Clear input on submit
+    //Render workout on list
+
+    //Remove form + clear input on submit
     inputDistance.value =
       inputDuration.value =
       inputCadence.value =
