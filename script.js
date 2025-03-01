@@ -23,6 +23,24 @@ class Workout {
   }
 }
 
+class Running extends Workout {
+  constructor(distance, duration, coords, cadence, pace) {
+    super(distance, duration, coords);
+
+    this.cadence = cadence;
+    this.pace = pace;
+  }
+}
+
+class Cycling extends Workout {
+  constructor(distance, duration, coords, elevationGain, speed) {
+    super(distance, duration, coords);
+
+    this.elevationGain = elevationGain;
+    this.speed = speed;
+  }
+}
+
 ////////////////////////////////////////
 //Implements the App class
 class App {
