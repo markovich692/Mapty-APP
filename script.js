@@ -114,6 +114,10 @@ class App {
   }
 
   _newWorkout(e) {
+    const isValid = function (...inputs) {
+      inputs.every(inp => Number.isFinite(inp));
+    };
+
     e.preventDefault();
     //Get data from form
     const type = inputType.value;
@@ -125,9 +129,11 @@ class App {
       const cadence = +inputCadence.value;
       //Checks if data is valid
       if (
-        !Number.isFinite(distance) ||
-        !Number.isFinite(duration) ||
-        !Number.isFinite(cadence)
+        // !Number.isFinite(distance) ||
+        // !Number.isFinite(duration) ||
+        // !Number.isFinite(cadence)
+
+        !isValid(distance, duration, cadence)
       )
         return alert('Input must be a positive number');
     }
@@ -136,11 +142,7 @@ class App {
     if (type === 'cycling') {
       const elevation = +inputElevation.value;
       //Checks if data is valid
-      if (
-        !Number.isFinite(distance) ||
-        !Number.isFinite(duration) ||
-        !Number.isFinite(elevation)
-      )
+      if (!isValid(distance, duration, cadence))
         return alert('Input must be a positive number');
     }
 
