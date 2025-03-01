@@ -24,20 +24,23 @@ class Workout {
 }
 
 class Running extends Workout {
-  constructor(distance, duration, coords, cadence, pace) {
+  constructor(distance, duration, coords, cadence) {
     super(distance, duration, coords);
 
     this.cadence = cadence;
-    this.pace = pace;
+  }
+
+  calcPace() {
+    //min/km
+    this.pace = this.duration / this.cadence;
   }
 }
 
 class Cycling extends Workout {
-  constructor(distance, duration, coords, elevationGain, speed) {
+  constructor(distance, duration, coords, elevationGain) {
     super(distance, duration, coords);
 
     this.elevationGain = elevationGain;
-    this.speed = speed;
   }
 }
 
@@ -68,7 +71,7 @@ class App {
   }
 
   _loadMap(position) {
-    console.log(this);
+    // console.log(this);
     const { latitude, longitude } = position.coords;
     let coords = [latitude, longitude];
     //sets the view to the current location
