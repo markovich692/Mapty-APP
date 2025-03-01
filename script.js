@@ -120,20 +120,28 @@ class App {
     const distance = +inputDistance.value;
     const duration = +inputDuration.value;
 
-    //Checks if data is valid
-
     //If workout is Running create a running object
-
     if (type === 'running') {
       const cadence = +inputCadence.value;
-      console.log(distance, duration, cadence);
+      //Checks if data is valid
+      if (
+        !Number.isFinite(distance) ||
+        !Number.isFinite(duration) ||
+        !Number.isFinite(cadence)
+      )
+        return alert('Input must be a positive number');
     }
 
     //If workout is Cycling create a cycling object
-
     if (type === 'cycling') {
       const elevation = +inputElevation.value;
-      console.log(distance, duration, elevation);
+      //Checks if data is valid
+      if (
+        !Number.isFinite(distance) ||
+        !Number.isFinite(duration) ||
+        !Number.isFinite(elevation)
+      )
+        return alert('Input must be a positive number');
     }
 
     //Adds new object to workout array
