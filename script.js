@@ -28,11 +28,14 @@ class Running extends Workout {
     super(distance, duration, coords);
 
     this.cadence = cadence;
+
+    this.calcPace();
   }
 
   calcPace() {
     //min/km
     this.pace = this.duration / this.cadence;
+    return this.pace;
   }
 }
 
@@ -41,6 +44,14 @@ class Cycling extends Workout {
     super(distance, duration, coords);
 
     this.elevationGain = elevationGain;
+
+    this.calcSpeed();
+  }
+
+  calcSpeed() {
+    //km/h
+    this.speed = this.distance / this.duration;
+    return this.speed;
   }
 }
 
