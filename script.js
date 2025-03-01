@@ -11,6 +11,19 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+//Implements the Workout class
+class Workout {
+  date = new Date();
+  id = (+new Date() + '').slice(-10);
+
+  constructor(distance, duration, coords) {
+    this.distance = distance;
+    this.duration = duration;
+    this.coords = coords;
+  }
+}
+
+////////////////////////////////////////
 //Implements the App class
 class App {
   #map;
@@ -19,11 +32,11 @@ class App {
   constructor() {
     this._getPosition();
 
+    //Changes the type of activity on change
+    inputType.addEventListener('change', this._toggleElevationField);
+
     //FORM
     form.addEventListener('submit', this._newWorkout.bind(this));
-
-    //Changes the type on change
-    inputType.addEventListener('change', this._toggleElevationField.bind(this));
   }
 
   _getPosition() {
@@ -71,7 +84,7 @@ class App {
   _newWorkout(e) {
     e.preventDefault();
 
-    //OnSubmit---->Adds marker to the page && adds the activity to the list
+    //OnSubmit---->Adds marker to the page
     const { lat, lng } = this.#mapEvent.latlng;
     L.marker([lat, lng])
       .addTo(this.#map)
