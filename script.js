@@ -116,12 +116,25 @@ class App {
   _newWorkout(e) {
     e.preventDefault();
     //Get data from form
+    const type = inputType.value;
+    const distance = +inputDistance.value;
+    const duration = +inputDuration.value;
 
     //Checks if data is valid
 
-    //If workout is running create a running object
+    //If workout is Running create a running object
 
-    //If workout is cycling create a cycling object
+    if (type === 'running') {
+      const cadence = +inputCadence.value;
+      console.log(distance, duration, cadence);
+    }
+
+    //If workout is Cycling create a cycling object
+
+    if (type === 'cycling') {
+      const elevation = +inputElevation.value;
+      console.log(distance, duration, elevation);
+    }
 
     //Adds new object to workout array
 
