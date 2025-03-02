@@ -162,6 +162,7 @@ class App {
     //Adds new object to workout array
 
     this.#workouts.push(workout);
+    console.log(type);
 
     //Render workout on map as marker
     // const { lat, lng } = this.#mapEvent.latlng;
@@ -173,7 +174,7 @@ class App {
           minWidth: 100,
           autoClose: false,
           closeOnClick: false,
-          className: 'running-popup',
+          className: type === 'running' ? 'running-popup' : 'cycling-popup',
         })
       )
       .setPopupContent('Workout')
