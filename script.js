@@ -114,8 +114,12 @@ class App {
   }
 
   _newWorkout(e) {
-    const isValid = function (...inputs) {
-      return inputs.every(inp => Number.isFinite(inp) && inp > 0); // Added return statement
+    const validInputs = function (...inputs) {
+      return inputs.every(inp => Number.isFinite(inp));
+    };
+
+    const allPositive = function (...inputs) {
+      return inputs.every(inp => inp > 0);
     };
 
     e.preventDefault();
@@ -129,7 +133,10 @@ class App {
       const cadence = +inputCadence.value;
 
       //Checks if data is valid
-      if (!isValid(distance, duration, cadence))
+      if (
+        !validInputs(distance, duration, cadence) ||
+        !allPositive(distance, duration, cadence)
+      )
         return alert('Input must be a positive number');
     }
 
@@ -138,7 +145,10 @@ class App {
       const elevation = +inputElevation.value;
       //Checks if data is valid
 
-      if (!isValid(distance, duration) && Number.isFinite(elevation))
+      if (
+        !validInputs(distance, duration, elevation) ||
+        !allPositive(distance, duration)
+      )
         return alert('Input must be a positive number');
     }
 
