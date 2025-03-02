@@ -17,15 +17,16 @@ class Workout {
   id = (+new Date() + '').slice(-10);
 
   constructor(coords, distance, duration) {
+    this.coords = coords;
     this.distance = distance;
     this.duration = duration;
-    this.coords = coords;
   }
 }
 
 class Running extends Workout {
+  type = 'running';
   constructor(coords, distance, duration, cadence) {
-    super(distance, duration, coords);
+    super(coords, distance, duration);
 
     this.cadence = cadence;
 
@@ -40,10 +41,11 @@ class Running extends Workout {
 }
 
 class Cycling extends Workout {
+  type = 'cycling';
   constructor(coords, distance, duration, elevationGain) {
-    super(distance, duration, coords);
+    super(coords, distance, duration);
 
-    this.elevationGain = elevationGain;
+    this.elevation = elevationGain;
 
     this.calcSpeed();
   }
@@ -124,6 +126,7 @@ class App {
     };
 
     e.preventDefault();
+
     //Get data from form
     const type = inputType.value;
     const distance = +inputDistance.value;
@@ -160,25 +163,12 @@ class App {
     }
 
     //Adds new object to workout array
-
     this.#workouts.push(workout);
-    console.log(type);
+    // console.log(type);
 
     //Render workout on map as marker
-    // const { lat, lng } = this.#mapEvent.latlng;
-    L.marker([lat, lng])
-      .addTo(this.#map)
-      .bindPopup(
-        L.popup({
-          maxWidth: 250,
-          minWidth: 100,
-          autoClose: false,
-          closeOnClick: false,
-          className: type === 'running' ? 'running-popup' : 'cycling-popup',
-        })
-      )
-      .setPopupContent('Workout')
-      .openPopup();
+
+    this._renderWorkoutMarker(workout);
 
     //Render workout on list
 
@@ -188,6 +178,22 @@ class App {
       inputCadence.value =
       inputElevation.value =
         '';
+  }
+
+  _renderWorkoutMarker(workout) {
+    L.marker(workout.coords)
+      .addTo(this.#map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          autoClose: false,
+          closeOnClick: false,
+          className: `${type}-popup`,
+        })
+      )
+      .setPopupContent('Workout')
+      .openPopup();
   }
 }
 
