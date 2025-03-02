@@ -42,6 +42,7 @@ class Running extends Workout {
 
 class Cycling extends Workout {
   type = 'cycling';
+
   constructor(coords, distance, duration, elevationGain) {
     super(coords, distance, duration);
 
@@ -159,7 +160,7 @@ class App {
       )
         return alert('Input must be a positive number');
 
-      workout = new Running([lat, lng], distance, duration, elevation);
+      workout = new Cycling([lat, lng], distance, duration, elevation);
     }
 
     //Adds new object to workout array
@@ -198,7 +199,6 @@ class App {
 }
 
 const app = new App();
-console.dir(app);
 
 // let formattedCurrency = new Intl.NumberFormat(navigator.language, {
 //   style: 'currency',
