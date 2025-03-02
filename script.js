@@ -115,7 +115,7 @@ class App {
 
   _newWorkout(e) {
     const isValid = function (...inputs) {
-      inputs.every(inp => Number.isFinite(inp));
+      return inputs.every(inp => Number.isFinite(inp) && inp > 0); // Added return statement
     };
 
     e.preventDefault();
@@ -127,14 +127,9 @@ class App {
     //If workout is Running create a running object
     if (type === 'running') {
       const cadence = +inputCadence.value;
-      //Checks if data is valid
-      if (
-        // !Number.isFinite(distance) ||
-        // !Number.isFinite(duration) ||
-        // !Number.isFinite(cadence)
 
-        !isValid(distance, duration, cadence)
-      )
+      //Checks if data is valid
+      if (!isValid(distance, duration, cadence))
         return alert('Input must be a positive number');
     }
 
@@ -142,7 +137,8 @@ class App {
     if (type === 'cycling') {
       const elevation = +inputElevation.value;
       //Checks if data is valid
-      if (!isValid(distance, duration, cadence))
+
+      if (!isValid(distance, duration) && Number.isFinite(elevation))
         return alert('Input must be a positive number');
     }
 
