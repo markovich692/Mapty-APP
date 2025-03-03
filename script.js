@@ -83,6 +83,16 @@ class App {
 
     //FORM
     form.addEventListener('submit', this._newWorkout.bind(this));
+
+    containerWorkouts.addEventListener('click', this._moveToPopup);
+  }
+
+  _moveToPopup(e) {
+    //Guard clause
+    if (!e.target.classList.contains('form')) return;
+
+    console.log(e.target);
+    console.log('clicked');
   }
 
   _getPosition() {
@@ -128,8 +138,6 @@ class App {
       inputCadence.value =
       inputElevation.value =
         '';
-
-    inputType.value = 'running';
 
     form.style.display = 'none';
 
