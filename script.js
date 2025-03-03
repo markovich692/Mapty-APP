@@ -192,6 +192,8 @@ class App {
       inputElevation.value =
         '';
 
+    inputType.value = 'running';
+
     form.classList.add('hidden');
   }
 
@@ -256,7 +258,7 @@ class App {
       </li>   
           `;
 
-    containerWorkouts.insertAdjacentHTML('beforeend', html);
+    form.insertAdjacentHTML('afterend', html);
   }
 }
 
