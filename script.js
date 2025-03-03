@@ -85,6 +85,18 @@ class App {
     form.addEventListener('submit', this._newWorkout.bind(this));
   }
 
+  _hideForm() {
+    inputDistance.value =
+      inputDuration.value =
+      inputCadence.value =
+      inputElevation.value =
+        '';
+
+    inputType.value = 'running';
+
+    form.classList.add('hidden');
+  }
+
   _getPosition() {
     if (navigator.geolocation)
       navigator.geolocation.getCurrentPosition(
@@ -186,15 +198,7 @@ class App {
     this._renderWorkout(workout);
 
     //Remove form + clear input on submit
-    inputDistance.value =
-      inputDuration.value =
-      inputCadence.value =
-      inputElevation.value =
-        '';
-
-    inputType.value = 'running';
-
-    form.classList.add('hidden');
+    this._hideForm();
   }
 
   _renderWorkoutMarker(workout) {
