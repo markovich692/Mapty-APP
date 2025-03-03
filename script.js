@@ -17,7 +17,6 @@ class Workout {
     this.coords = coords;
     this.distance = distance;
     this.duration = duration;
-    this._setdescription();
   }
 
   _setdescription() {
@@ -26,7 +25,7 @@ class Workout {
 
     this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
       months[this.date.getMonth()]
-    } ${this.date.getDate()}}`;
+    } ${this.date.getDate()}`;
   }
 }
 
@@ -38,6 +37,8 @@ class Running extends Workout {
     this.cadence = cadence;
 
     this.calcPace();
+
+    this._setdescription();
   }
 
   calcPace() {
@@ -56,6 +57,8 @@ class Cycling extends Workout {
     this.elevation = elevationGain;
 
     this.calcSpeed();
+
+    this._setdescription();
   }
 
   calcSpeed() {
@@ -212,7 +215,7 @@ class App {
     const html = `<li class="workout workout--${workout.type}" data-id=${
       workout.id
     }>
-          <h2 class="workout__title">${'hello'}</h2>
+          <h2 class="workout__title">${workout.description}</h2>
           <div class="workout__details">
             <span class="workout__icon"> ${
               workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
