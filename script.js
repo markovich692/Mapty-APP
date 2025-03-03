@@ -227,7 +227,34 @@ class App {
             <span class="workout__icon">⏱</span>
             <span class="workout__value">${workout.duration}</span>
             <span class="workout__unit">min</span>
-          </div>`;
+          </div>
+          
+          <div class="workout__details">
+            <span class="workout__icon">⚡️</span>
+            <span class="workout__value">
+            ${
+              workout.type === 'running'
+                ? workout.pace.toFixed(1)
+                : workout.speed.toFixed(1)
+            }
+            </span>
+            <span class="workout__unit">
+            ${workout.type === 'running' ? 'min/km' : 'km/h'}
+            </span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">
+            ${workout.type === 'running' ? '🦶🏼' : '⛰'}
+            </span>
+            <span class="workout__value">
+            ${workout.type === 'running' ? workout.cadence : workout.elevation}
+            </span>
+            <span class="workout__unit">
+            ${workout.type === 'running' ? 'spm' : 'm'}
+            </span>
+          </div>
+      </li>   
+          `;
 
     containerWorkouts.insertAdjacentHTML('beforeend', html);
   }
