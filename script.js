@@ -1,8 +1,5 @@
 'use strict';
 
-// prettier-ignore
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
 const inputType = document.querySelector('.form__input--type');
@@ -20,6 +17,16 @@ class Workout {
     this.coords = coords;
     this.distance = distance;
     this.duration = duration;
+    this._setdescription();
+  }
+
+  _setdescription() {
+    // prettier-ignore
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
+      months[this.date.getMonth()]
+    } ${this.date.getDate()}}`;
   }
 }
 
@@ -202,23 +209,13 @@ class App {
   }
 
   _renderWorkout(workout) {
-    const id = workout.id;
-    const type = workout.type;
-    const typeUpper =
-      workout.type.split('')[0].toUpperCase() + workout.type.slice(1);
-    const date = new Intl.DateTimeFormat(navigator.language, {
-      month: 'long',
-      day: 'numeric',
-    }).format(workout.date);
-    const distance = workout.distance;
-    const duration = workout.duration;
-
-    console.log(type, date);
-    const html = `<li class="workout workout--${type}" data-id=${id}>
-          <h2 class="workout__title">${typeUpper} on ${date}</h2>
+    const html = `<li class="workout workout--${workout.type}" data-id=${
+      workout.id
+    }>
+          <h2 class="workout__title">${'hello'}</h2>
           <div class="workout__details">
             <span class="workout__icon"> ${
-              type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
+              workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
             }  </span>
             <span class="workout__value"> ${workout.distance}</span>
             <span class="workout__unit">km</span>
