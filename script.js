@@ -217,7 +217,9 @@ class App {
     const html = `<li class="workout workout--${type}" data-id=${id}>
           <h2 class="workout__title">${typeUpper} on ${date}</h2>
           <div class="workout__details">
-            <span class="workout__icon">🏃‍♂️</span>
+            <span class="workout__icon"> ${
+              type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
+            }  </span>
             <span class="workout__value"> ${workout.distance}</span>
             <span class="workout__unit">km</span>
           </div>
