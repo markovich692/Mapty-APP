@@ -279,7 +279,15 @@ class App {
     //Guard Clause
     if (!workoutEl) return;
 
+    console.log(workoutEl.dataset.id);
+
     const workouts = this.#workouts;
+
+    workouts.forEach(function (workout) {
+      if (workout.id === workoutEl.dataset.id) {
+        console.log('ID do match');
+      }
+    });
   }
 }
 
