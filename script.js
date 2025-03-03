@@ -84,15 +84,7 @@ class App {
     //FORM
     form.addEventListener('submit', this._newWorkout.bind(this));
 
-    containerWorkouts.addEventListener('click', this._moveToPopup);
-  }
-
-  _moveToPopup(e) {
-    //Guard clause
-    if (!e.target.classList.contains('form')) return;
-
-    console.log(e.target);
-    console.log('clicked');
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   _getPosition() {
@@ -279,6 +271,15 @@ class App {
           `;
 
     form.insertAdjacentHTML('afterend', html);
+  }
+
+  _moveToPopup(e) {
+    const workoutEl = e.target.closest('.workout');
+
+    //Guard Clause
+    if (!workoutEl) return;
+
+    const workouts = this.#workouts;
   }
 }
 
