@@ -209,6 +209,9 @@ class App {
 
     //Remove form + clear input on submit
     this._hideForm();
+
+    //Sets the LOCAL STORAGE
+    this._setLocalStorage();
   }
 
   _renderWorkoutMarker(workout) {
@@ -300,6 +303,13 @@ class App {
     workout.click();
 
     console.log(workout);
+  }
+
+  _setLocalStorage() {
+    console.log('stored');
+    console.log(this.#workouts);
+
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
   }
 }
 
