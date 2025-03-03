@@ -85,18 +85,6 @@ class App {
     form.addEventListener('submit', this._newWorkout.bind(this));
   }
 
-  _hideForm() {
-    inputDistance.value =
-      inputDuration.value =
-      inputCadence.value =
-      inputElevation.value =
-        '';
-
-    inputType.value = 'running';
-
-    form.classList.add('hidden');
-  }
-
   _getPosition() {
     if (navigator.geolocation)
       navigator.geolocation.getCurrentPosition(
@@ -132,6 +120,22 @@ class App {
     this.#mapEvent = mapE;
     form.classList.remove('hidden');
     inputDistance.focus();
+  }
+
+  _hideForm() {
+    inputDistance.value =
+      inputDuration.value =
+      inputCadence.value =
+      inputElevation.value =
+        '';
+
+    inputType.value = 'running';
+
+    form.style.display = 'none';
+
+    form.classList.add('hidden');
+
+    setTimeout(() => (form.style.display = 'grid'), 1000);
   }
 
   _toggleElevationField() {
