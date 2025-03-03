@@ -281,13 +281,11 @@ class App {
 
     console.log(workoutEl.dataset.id);
 
-    const workouts = this.#workouts;
+    const workout = this.#workouts.find(
+      workout => workout.id === workoutEl.dataset.id
+    );
 
-    workouts.forEach(function (workout) {
-      if (workout.id === workoutEl.dataset.id) {
-        console.log('ID do match');
-      }
-    });
+    console.log(workout);
   }
 }
 
