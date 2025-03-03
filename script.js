@@ -172,6 +172,8 @@ class App {
     this._renderWorkoutMarker(workout);
 
     //Render workout on list
+    // this._renderWorkout(this.#workouts);
+    this._renderWorkout(workout);
 
     //Remove form + clear input on submit
     inputDistance.value =
@@ -179,6 +181,8 @@ class App {
       inputCadence.value =
       inputElevation.value =
         '';
+
+    form.classList.add('hidden');
   }
 
   _renderWorkoutMarker(workout) {
@@ -195,6 +199,35 @@ class App {
       )
       .setPopupContent('Workout')
       .openPopup();
+  }
+
+  _renderWorkout(workout) {
+    const id = workout.id;
+    const type = workout.type;
+    const typeUpper =
+      workout.type.split('')[0].toUpperCase() + workout.type.slice(1);
+    const date = new Intl.DateTimeFormat(navigator.language, {
+      month: 'long',
+      day: 'numeric',
+    }).format(workout.date);
+    const distance = workout.distance;
+    const duration = workout.duration;
+
+    console.log(type, date);
+    const html = `<li class="workout workout--${type}" data-id=${id}>
+          <h2 class="workout__title">${typeUpper} on ${date}</h2>
+          <div class="workout__details">
+            <span class="workout__icon">🏃‍♂️</span>
+            <span class="workout__value"> ${workout.distance}</span>
+            <span class="workout__unit">km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⏱</span>
+            <span class="workout__value">${workout.duration}</span>
+            <span class="workout__unit">min</span>
+          </div>`;
+
+    containerWorkouts.insertAdjacentHTML('beforeend', html);
   }
 }
 
