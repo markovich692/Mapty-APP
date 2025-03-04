@@ -106,24 +106,18 @@ class App {
   }
 
   _loadMap(position) {
-    // console.log(this);
     const { latitude, longitude } = position.coords;
     let coords = [latitude, longitude];
     //sets the view to the current location
     this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
 
-    // console.log(this.#map);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
 
-    // console.log(this.#map);
-    // console.log(this);
-
     //Handling events on map using the map object
     this.#map.on('click', this._showForm.bind(this));
-    // console.log(this);
 
     //adds the marker based on localStorage objects
     this.#workouts.forEach(work => {
@@ -204,7 +198,6 @@ class App {
 
     //Adds new object to workout array
     this.#workouts.push(workout);
-    // console.log(type);
 
     //Render workout on map as marker
 
@@ -307,9 +300,7 @@ class App {
     });
 
     //Using the public interface
-    workout.click();
-
-    console.log(workout);
+    // workout.click();
   }
 
   _setLocalStorage() {
@@ -328,59 +319,3 @@ class App {
   }
 }
 const app = new App();
-
-// let formattedCurrency = new Intl.NumberFormat(navigator.language, {
-//   style: 'currency',
-//   currency: 'USD',
-// }).format(1399999999);
-
-// console.log(formattedCurrency);
-// console.log(Number.MAX_SAFE_INTEGER);
-// console.log(900719925474099149999n);
-// console.log(BigInt('900719925474099149999'));
-
-//CLASS
-// class Workout {
-//   #id;
-//   #date;
-
-//   constructor(id, distance, duration, coords, date) {
-//     this.#id = id;
-//     this.distance = distance;
-//     this.duration = duration;
-//     this.coords = coords;
-//     this.#date = date;
-//   }
-// }
-
-// class Running extends Workout {
-//   #fName;
-
-//   constructor(id, distance, duration, coords, date, fName, cadence, pace) {
-//     super(id, distance, duration, coords, date);
-
-//     this.#fName = fName;
-//     this.cadence = cadence;
-//     this.pace = pace;
-//   }
-// }
-
-// class Cycling extends Workout {
-//   #fName;
-//   constructor(
-//     id,
-//     distance,
-//     duration,
-//     coords,
-//     date,
-//     fName,
-//     elevationGain,
-//     speed
-//   ) {
-//     super(id, distance, duration, coords, date);
-
-//     this.#fName = fName;
-//     this.elevationGain = elevationGain;
-//     this.speed = speed;
-//   }
-// }
