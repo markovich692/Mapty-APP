@@ -308,14 +308,20 @@ class App {
   }
 
   _getLocalStorage() {
+    //arrays of datas is converted back to regular objects
     const data = JSON.parse(localStorage.getItem('workouts'));
 
     if (!data) return;
     this.#workouts = data;
 
-    this.#workouts.forEach(work => {
-      this._renderWorkout(work);
+    this.#workouts.forEach(workout => {
+      this._renderWorkout(workout);
     });
+  }
+
+  reset() {
+    localStorage.removeItem(workouts);
+    location.reload();
   }
 }
 const app = new App();
