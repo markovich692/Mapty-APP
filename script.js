@@ -124,6 +124,11 @@ class App {
     //Handling events on map using the map object
     this.#map.on('click', this._showForm.bind(this));
     // console.log(this);
+
+    //adds the marker based on localStorage objects
+    this.#workouts.forEach(work => {
+      this._renderWorkoutMarker(work);
+    });
   }
 
   _showForm(mapE) {
@@ -314,6 +319,7 @@ class App {
   _getLocalStorage() {
     const data = JSON.parse(localStorage.getItem('workouts'));
 
+    if (!data) return;
     this.#workouts = data;
 
     this.#workouts.forEach(work => {
