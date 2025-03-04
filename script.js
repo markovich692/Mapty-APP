@@ -84,10 +84,12 @@ class App {
   constructor() {
     this._getPosition();
 
+    this._getLocalStorage();
+
+    //EVENT LISTENERS
     //Changes the type of activity on change
     inputType.addEventListener('change', this._toggleElevationField);
 
-    //FORM
     form.addEventListener('submit', this._newWorkout.bind(this));
 
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
@@ -306,13 +308,19 @@ class App {
   }
 
   _setLocalStorage() {
-    console.log('stored');
-    console.log(this.#workouts);
-
     localStorage.setItem('workouts', JSON.stringify(this.#workouts));
   }
-}
 
+  _getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('workouts'));
+
+    this.#workouts = data;
+
+    this.#workouts.forEach(work => {
+      this._renderWorkout(work);
+    });
+  }
+}
 const app = new App();
 
 // let formattedCurrency = new Intl.NumberFormat(navigator.language, {
